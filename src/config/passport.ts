@@ -25,6 +25,4 @@ const jwtVerify = async (payload, done) => {
 
 const jwtStrategy = new JwtStrategy(jwtOptions, jwtVerify);
 
-export = {
-  jwtStrategy,
-};
+export { jwtStrategy };

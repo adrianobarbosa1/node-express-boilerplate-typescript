@@ -25,4 +25,4 @@ const logger = winston.createLogger({
   ],
 });
 
-export = { logger };
+export { logger };

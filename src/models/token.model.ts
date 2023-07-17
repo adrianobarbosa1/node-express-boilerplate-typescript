@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-const { toJSON } = require('./plugins');
-const { tokenTypes } = require('../config/tokens');
+import mongoose from "mongoose";
+import { tokenTypes } from "../config/tokens";
 
-const tokenSchema = mongoose.Schema(
+const tokenSchema = new mongoose.Schema(
   {
     token: {
       type: String,
@@ -11,12 +10,16 @@ const tokenSchema = mongoose.Schema(
     },
     user: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     type: {
       type: String,
-      enum: [tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
+      enum: [
+        tokenTypes.REFRESH,
+        tokenTypes.RESET_PASSWORD,
+        tokenTypes.VERIFY_EMAIL,
+      ],
       required: true,
     },
     expires: {
@@ -29,16 +32,18 @@ const tokenSchema = mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    toJSON: {
+      //removendo algumas propriedades de respota para melhor sincronização com
+      //outros microserviços
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+      },
+    },
   }
 );
 
-// add plugin that converts mongoose to json
-tokenSchema.plugin(toJSON);
+const Token = mongoose.model("Token", tokenSchema);
 
-/**
- * @typedef Token
- */
-const Token = mongoose.model('Token', tokenSchema);
-
-module.exports = Token;
+export { Token };

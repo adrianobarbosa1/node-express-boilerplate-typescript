@@ -1,5 +1,5 @@
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
-import { User } from "../models";
+import { User } from "../models/user.model";
 import config from "./config";
 import { tokenTypes } from "./tokens";
 
@@ -8,7 +8,7 @@ const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
-const jwtVerify = async (payload, done) => {
+const jwtVerify = async (payload: any, done: any) => {
   try {
     if (payload.type !== tokenTypes.ACCESS) {
       throw new Error("Invalid token type");

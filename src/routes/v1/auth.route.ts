@@ -39,7 +39,7 @@ router.post(
   authController.verifyEmail
 );
 
-module.exports = router;
+export { router as authRoute };
 
 /**
  * @swagger

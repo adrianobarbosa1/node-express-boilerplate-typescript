@@ -37,7 +37,7 @@ router
     userController.deleteUser
   );
 
-module.exports = router;
+export { router as userRoute };
 
 /**
  * @swagger

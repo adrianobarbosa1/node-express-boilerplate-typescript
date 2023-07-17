@@ -6,18 +6,18 @@ import helmet from "helmet";
 import httpStatus from "http-status";
 import passport from "passport";
 import config from "./config/config";
-import morgan from "./config/morgan";
+import { errorHandler, successHandler } from "./config/morgan";
 import { jwtStrategy } from "./config/passport";
-import { errorConverter, errorHandler } from "./middlewares/error";
+import { errorConverter } from "./middlewares/error";
 import { authLimiter } from "./middlewares/rateLimiter";
-import routes from "./routes/v1";
-import ApiError from "./utils/ApiError";
+import { router } from "./routes/v1";
+import { ApiError } from "./utils/ApiError";
 
 const app = express();
 
 if (config.env !== "test") {
-  app.use(morgan.successHandler);
-  app.use(morgan.errorHandler);
+  app.use(successHandler);
+  app.use(errorHandler);
 }
 
 // set security HTTP headers
@@ -49,7 +49,7 @@ if (config.env === "production") {
 }
 
 // v1 api routes
-app.use("/v1", routes);
+app.use("/v1", router);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {

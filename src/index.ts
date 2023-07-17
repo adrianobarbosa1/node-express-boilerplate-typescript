@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
-const app = require("./app");
-const config = require("./config/config");
-const logger = require("./config/logger");
+import mongoose from "mongoose";
+import { app } from "./app";
+import config from "./config/config";
+import { logger } from "./config/logger";
 
 let server: any;
-mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
+mongoose.connect(config.mongoose.url).then(() => {
   logger.info(`Connected to ${config.mongoose.url}`);
   server = app.listen(config.port, () => {
     logger.info(`Listening to port ${config.port}`);

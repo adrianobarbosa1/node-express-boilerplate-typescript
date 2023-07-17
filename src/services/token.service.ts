@@ -1,11 +1,11 @@
-import httpStatus from "http-status";
-import jwt from "jsonwebtoken";
-import moment from "moment";
-import config from "../config/config";
-import { tokenTypes } from "../config/tokens";
-import { Token } from "../models";
-import ApiError from "../utils/ApiError";
-import userService from "./user.service";
+const jwt = require("jsonwebtoken");
+const moment = require("moment");
+const httpStatus = require("http-status");
+const config = require("../config/config");
+const userService = require("./user.service");
+const { Token } = require("../models");
+const ApiError = require("../utils/ApiError");
+const { tokenTypes } = require("../config/tokens");
 
 /**
  * Generate token
@@ -156,7 +156,7 @@ const generateVerifyEmailToken = async (user) => {
   return verifyEmailToken;
 };
 
-export = {
+export const tokenService = {
   generateToken,
   saveToken,
   verifyToken,

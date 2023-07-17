@@ -49,7 +49,7 @@ const verifyEmail = {
   }),
 };
 
-export {
+export const authValidation = {
   forgotPassword,
   login,
   logout,

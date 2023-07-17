@@ -1,8 +1,8 @@
 import express from "express";
-import authController from "../../controllers/auth.controller";
-import auth from "../../middlewares/auth";
-import validate from "../../middlewares/validate";
-import authValidation from "../../validations/auth.validation";
+import { authController } from "../../controllers/auth.controller";
+import { auth } from "../../middlewares/auth";
+import { validate } from "../../middlewares/validate";
+import { authValidation } from "../../validations/auth.validation";
 
 const router = express.Router();
 
@@ -39,7 +39,7 @@ router.post(
   authController.verifyEmail
 );
 
-export { router as authRoute };
+export { router as authRouter };
 
 /**
  * @swagger

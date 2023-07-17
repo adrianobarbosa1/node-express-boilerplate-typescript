@@ -1,8 +1,8 @@
 import express from "express";
-import userController from "../../controllers/user.controller";
-import auth from "../../middlewares/auth";
-import validate from "../../middlewares/validate";
-import userValidation from "../../validations/user.validation";
+import { userController } from "../../controllers/user.controller";
+import { auth } from "../../middlewares/auth";
+import { validate } from "../../middlewares/validate";
+import { userValidation } from "../../validations/user.validation";
 
 const router = express.Router();
 
@@ -37,7 +37,7 @@ router
     userController.deleteUser
   );
 
-export { router as userRoute };
+export { router as userRouter };
 
 /**
  * @swagger
